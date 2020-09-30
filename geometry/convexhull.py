@@ -1,5 +1,5 @@
 """
-Calculate the convex hull in O(NlogN) time.
+convex hull : O(NlogN)
 """
 
 
