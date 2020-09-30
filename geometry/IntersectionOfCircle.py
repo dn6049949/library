@@ -1,5 +1,5 @@
 """
-Calculate the intersections of 2 circles, R1(x1,y1,r1) and R2(x2,y2,r2) in O(1) times
+Calculate the intersections of 2 circles, R1(x1,y1,r1) and R2(x2,y2,r2) in O(1) time.
 ref : https://shogo82148.github.io/homepage/memo/geometry/circle-cross.html"
 """
 
