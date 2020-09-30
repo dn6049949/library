@@ -1,10 +1,15 @@
-# O(NlogN)
+"""
+Calculate the convex hull in O(NlogN) time.
+"""
+
 
 def det(a,b):
     return a[0]*b[1]-a[1]*b[0]
 
+
 def minus(a,b):
     return (a[0]-b[0],a[1]-b[1])
+
 
 def convex_hull(ps):
     n = len(ps)
