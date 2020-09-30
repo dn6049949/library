@@ -1,59 +1,60 @@
-import math
-from collections import deque
-import sys
-input = sys.stdin.buffer.readline
+"""
+Lowest Common Ancestor
+init : O(N)
+lca : O(logN)
+"""
 
-def lca(x, y):
-    if d[x] < d[y]:
-        x,y = y,x
-    dy = d[y]
-    k = d[x]-dy
-    while k:
-        x = p[x][int(math.log(k,2))]
-        k = d[x]-dy
 
-    if x == y:
-        return x
+class LCA:
+    def __init__(self, v, root=0):
+        self.n = len(v)
+        self.h = n.bit_length()
+        self.root = root
+        self.d = [None]*self.n
+        self.p = [[None]*self.n for _ in range(self.h)]
 
-    for i in range(h)[::-1]:
-        if p[x][i] != p[y][i]:
-            x = p[x][i]
-            y = p[y][i]
-    return p[x][0]
+        self.d[self.root] = 0
+        self.p[0][self.root] = self.root
+        q = [self.root]
+        while q:
+            x = q.pop()
+            nd = self.d[x] + 1
+            for y in v[x]:
+                if self.d[y] is None:
+                    self.d[y] = nd
+                    self.p[0][y] = x
+                    q.append(y)
 
-n = int(input())
-v = [[] for i in range(n)]
-for i in range(n-1):
-    a,b = map(int, input().split())
-    a -= 1
-    b -= 1
-    v[a].append(b)
-    v[b].append(a)
+        self.h = (max(self.d)+1).bit_length()
 
-# bfsで各ノードの親を取得
-d = [0]*n
-d[0] = 1
-p = [[] for i in range(n)]
-p[0].append(0)
-q = deque([0])
-while q:
-    x = q.popleft()
-    nd = d[x]+1
-    for y in v[x]:
-        if not d[y]:
-            d[y] = nd
-            p[y].append(x)
-            q.append(y)
+        for i in range(self.h-1):
+            j = i+1
+            for x, px in enumerate(self.p[i]):
+                self.p[j][x] = self.p[i][px]
 
-# p[x][i] := xの2^i個上のノード
-h = int(math.log(max(d),2))+1
-for i in range(h-1):
-    for x in range(n):
-        p[x].append(p[p[x][i]][i])
 
-q = int(input())
-for _ in range(q):
-    a,b = map(int, input().split())
-    a -= 1
-    b -= 1
-    print(d[a]+d[b]-2*d[lca(a,b)]+1)
+    def lca(self, x, y):
+        if self.d[x] < self.d[y]:
+            x, y = y, x
+
+        dy = self.d[y]
+        k = self.d[x] - dy
+        i = 0
+        while k:
+            if k&1:
+                x = self.p[i][x]
+            i += 1
+            k >>= 1
+
+        if x == y:
+            return x
+
+        for i in range(self.h)[::-1]:
+            if self.p[i][x] != self.p[i][y]:
+                x = self.p[i][x]
+                y = self.p[i][y]
+        return self.p[0][x]
+
+
+    def dist(self, x, y):
+        return self.d[x] + self.d[y] - 2 * self.d[self.lca(x, y)]
