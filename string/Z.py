@@ -1,0 +1,23 @@
+# Z-algorithm
+"""
+Z[i] := SとS[i:len(S))の最長共通接頭辞の長さ
+ を構築
+O(len(S))
+"""
+def Z_algorithm(s):
+    n = len(s)
+    z = [0]*n
+    z[0] = n
+    c = 1
+    for i in range(1,n):
+        if i+z[i-c] < c+z[c]:
+            z[i] = z[i-c]
+        else:
+            j = max(0,c+z[c]-i)
+            while i+j < n and s[j] == s[i+j]:
+                j += 1
+            z[i] = j
+            c = i
+    return z
+s = input()
+print(Z_algorithm(s))
