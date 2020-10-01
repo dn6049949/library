@@ -1,4 +1,6 @@
-# 最小費用流 O(FElogV)
+"""
+Minimum Cost Flow : O(FElogV)
+"""
 
 from heapq import heappush, heappop
 
@@ -7,11 +9,13 @@ class MinCostFlow:
         self.n = n
         self.graph = [[] for _ in range(n)]
 
+
     def add_edge(self, fr, to, cap, cost):
         forward = [to, cap, cost, None]
         backward = forward[3] = [fr, 0, -cost, forward]
         self.graph[fr].append(forward)
         self.graph[to].append(backward)
+
 
     def flow(self, s, t, f):
         n = self.n
@@ -38,7 +42,8 @@ class MinCostFlow:
                     w, cap, cost, _ = e
                     if cap > 0 and r0 + cost - h[w] < dist[w]:
                         dist[w] = r = r0 + cost - h[w]
-                        prv_v[w] = v; prv_e[w] = e
+                        prv_v[w] = v
+                        prv_e[w] = e
                         heappush(q, (r, w))
             if dist[t] == float("inf"):
             	return None
@@ -46,7 +51,8 @@ class MinCostFlow:
             for i in range(n):
                 h[i] += dist[i]
 
-            d = f; v = t
+            d = f
+            v = t
             while v != s:
                 d = min(d, prv_e[v][1])
                 v = prv_v[v]
