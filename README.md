@@ -17,11 +17,11 @@
 ## グラフ
 - [Union Find](https://github.com/dn6049949/library/blob/master/graph/UnionFind.py)
 
-- [最大流](https://github.com/dn6049949/library/blob/master/graph/MaximumFlow.py)
+- [最大流(Dinic)](https://github.com/dn6049949/library/blob/master/graph/MaximumFlow.py)
 
 - [最小費用流](https://github.com/dn6049949/library/blob/master/graph/MinCostFlow.py)
 
-- [最終共通祖先](https://github.com/dn6049949/library/blob/master/graph/LCA.py)
+- [最終共通祖先(LCA)](https://github.com/dn6049949/library/blob/master/graph/LCA.py)
 
 - [橋 / 関節点](https://github.com/dn6049949/library/blob/master/graph/LowLink.py)
 
@@ -31,7 +31,7 @@
 ## 文字列
 - [Z-algorithm](https://github.com/dn6049949/library/tree/master/string/Z.py)
 
-- [回文列挙](https://github.com/dn6049949/library/tree/master/string/Manacher.py)
+- [回文列挙(Manacher)](https://github.com/dn6049949/library/tree/master/string/Manacher.py)
 
 
 ## 数学
@@ -39,7 +39,7 @@
 
 - [ラグランジュ補間](https://github.com/dn6049949/library/blob/master/math/LagrangeInterpolation.py)
 
-- [中国剰余定理](https://github.com/dn6049949/library/blob/master/math/ChineseRemainderTheorem.py)
+- [中国剰余定理(CRT)](https://github.com/dn6049949/library/blob/master/math/ChineseRemainderTheorem.py)
 
 - [冪乗和](https://github.com/dn6049949/library/blob/master/math/SumsOfPowers.py)
 
