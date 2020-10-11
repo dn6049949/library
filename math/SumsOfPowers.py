@@ -1,5 +1,5 @@
 """
-S(n,k) = 1^k + 2^k + .. + n^kを求める(O(KlogMOD))
+S(n,k) = 1^k + 2^k + .. + n^kを求める : O(KlogMOD)
 
 (1) n <= k+1
  O(nlogk)で普通に求められる.
