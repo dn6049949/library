@@ -5,7 +5,7 @@
 ## データ構造
 - [Segment Tree](https://github.com/dn6049949/library/blob/master/structure/SegmentTree.py)
 
-- [Binary Indexed Tree](https://github.com/dn6049949/library/blob/master/structure/BIT.py)
+- [Binary Indexed Tree](https://github.com/dn6049949/library/blob/master/structure/BinaryIndexedTree.py)
 
 - [Sliding Window Aggregation](https://github.com/dn6049949/library/blob/master/structure/SlidingWindowAggregation.py)
 
@@ -25,7 +25,7 @@
 
 - [橋 / 関節点](https://github.com/dn6049949/library/blob/master/graph/LowLink.py)
 
-- [最大独立集合 / 最大クリーク](https://github.com/dn6049949/library/blob/master/graph/MximumIndependentSet.py)
+- [最大独立集合 / 最大クリーク](https://github.com/dn6049949/library/blob/master/graph/MaximumIndependentSet.py)
 
 
 ## 文字列
