@@ -1,6 +1,5 @@
 """
 Union-Find
-no comment
 """
 
 def root(x):
