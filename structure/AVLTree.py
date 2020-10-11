@@ -280,15 +280,3 @@ class Node:
             if self.right is not None:
                 for x in self.right._dfs():
                     yield x
-
-
-q = int(input())
-s = AVLtree()
-for _ in range(q):
-  t,x = map(int, input().split())
-  if t == 1:
-    s.insert(x)
-  else:
-    k = s[x-1]
-    print(k)
-    s.erase(k)
