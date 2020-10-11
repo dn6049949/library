@@ -1,5 +1,7 @@
 """
 回文全列挙 : O(N)
+od[i] : 文字iを中心とする最長の回文の半径
+ev[i] : 文字iと文字i+1を中心とする最長の回文の半径
 """
 
 def manacher(s):
@@ -48,6 +50,3 @@ def manacher(s):
             k = 1
         c += d
     return ev,od
-
-s = input()
-print(manacher(s))
