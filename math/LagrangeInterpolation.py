@@ -72,10 +72,7 @@ def interpolation(x,y,t,mod=mod):
     inv = [None]*(n+1)
     inv[-1] = pow(fact,mod-2,mod)
     for i in range(n)[::-1]:
-        invi = inv[i+1]*(i+1)
-        if invi >= mod:
-            invi %= mod
-        inv[i] = invi
+        inv[i] = inv[i+1]*(i+1)%mod
 
     d = x[1]-x[0]
     f = 1
