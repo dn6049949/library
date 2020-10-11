@@ -1,4 +1,6 @@
-# 回文全列挙O(N)
+"""
+回文全列挙 : O(N)
+"""
 
 def manacher(s):
     n = len(s)
