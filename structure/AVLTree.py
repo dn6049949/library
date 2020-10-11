@@ -1,10 +1,10 @@
 class AVLtree:
     """
     参考：http://www.nct9.ne.jp/m_hiroi/light/pyalgo12.html
-    insert : 挿入
-    erase : 削除
-    lower_bound(x) : x <= v なる最小のv、なければ-float("inf")、最小値はlower(-float("inf"))
-    upper_bound(x) : v < x なる最大のv、なければfloat("inf")、最大値はupper(float("inf"))
+    insert : 挿入 O(logN)
+    erase : 削除 O(logN)
+    lower_bound(x) : x <= v なる最小のv、なければ-float("inf")、最小値はlower(-float("inf")) O(logN)
+    upper_bound(x) : v < x なる最大のv、なければfloat("inf")、最大値はupper(float("inf")) O(logN)
     print(avltree) : デバッグ用
     """
 
