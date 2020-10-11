@@ -1,5 +1,6 @@
-# S(n,k) = 1^k + 2^k + .. + n^kを求める(O(KlogMOD))
 """
+S(n,k) = 1^k + 2^k + .. + n^kを求める(O(KlogMOD))
+
 (1) n <= k+1
  O(nlogk)で普通に求められる.
 
@@ -21,24 +22,24 @@
 
 mod = 1000000007
 
-
-N = 6*10**5
-fact = [1]
-for i in range(1,N+1):
-    fact.append(fact[-1]*i%mod)
-
-inv = [None]*(N+1)
-inv[-1] = pow(fact[-1],mod-2,mod)
-for i in range(N)[::-1]:
-    inv[i] = inv[i+1]*(i+1)%mod
-
-def s(n,k):
+def sum_of_powers(n,k):
     if n <= k+1:
         res = 0
         for i in range(1,n+1):
             res += pow(i,k,mod)
             res %= mod
         return res
+
+    fact = 1
+    for i in range(2,k+1):
+        fact *= i
+        if fact >= mod:
+            fact %= mod
+
+    inv = [None]*(k+2)
+    inv[-1] = pow(fact, mod-2, mod)
+    for i in range(k+1)[::-1]:
+        inv[i] = inv[i+1]*(i+1)%mod
 
     f = 1
     for i in range(k+2):
@@ -57,10 +58,3 @@ def s(n,k):
         res += si*f*fi*pow(n-i,mod-2,mod)%mod
         res %= mod
     return res
-
-
-
-
-for i in range(10):
-    for j in range(10):
-        print(i,j,s(j,i))
