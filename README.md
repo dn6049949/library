@@ -27,6 +27,8 @@
 
 - [最大独立集合 / 最大クリーク](https://github.com/dn6049949/library/blob/master/graph/MaximumIndependentSet.py)
 
+- [強連結成分分解](https://github.com/dn6049949/library/blob/master/graph/SCC.py)
+
 
 ## 文字列
 - [Z-algorithm](https://github.com/dn6049949/library/tree/master/string/Z.py)
