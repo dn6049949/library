@@ -49,4 +49,6 @@
 ## 幾何
 - [2円の交点](https://github.com/dn6049949/library/blob/master/geometry/IntersectionOfCircle.py)
 
+- [2線の交点](https://github.com/dn6049949/library/blob/master/geometry/IntersectionOfLine.py)
+
 - [凸包](https://github.com/dn6049949/library/blob/master/geometry/convexhull.py)
