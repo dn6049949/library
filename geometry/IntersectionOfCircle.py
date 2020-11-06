@@ -33,4 +33,4 @@ def intersection(R1,R2):
         k = d/r
         X1,Y1 = X+y2*k+x1, Y-x2*k+y1
         X2,Y2 = X-y2*k+x1, Y+x2*k+y1
-        return [(X1,Y1),(X2,Y2)]
+        return (X1,Y1),(X2,Y2)
