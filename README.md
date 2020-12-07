@@ -45,6 +45,7 @@
 
 - [冪乗和](https://github.com/dn6049949/library/blob/master/math/SumsOfPowers.py)
 
+- [漸化式 (Berlekamp-Massey)](https://github.com/dn6049949/library/blob/master/math/BerlekampMassey.py)
 
 ## 幾何
 - [2円の交点](https://github.com/dn6049949/library/blob/master/geometry/IntersectionOfCircle.py)
