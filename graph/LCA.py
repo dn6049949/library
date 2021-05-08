@@ -8,7 +8,7 @@ lca : O(logN)
 class LCA:
     def __init__(self, v, root=0):
         self.n = len(v)
-        self.h = n.bit_length()
+        self.h = self.n.bit_length()
         self.root = root
         self.d = [None]*self.n
         self.p = [[None]*self.n for _ in range(self.h)]
