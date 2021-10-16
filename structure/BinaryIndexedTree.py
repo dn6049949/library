@@ -1,7 +1,7 @@
 class BIT:
     """
     bit.add(i, val) : s[i] += val O(logN)
-    bit.sum(l, r) : s[l:r+1]の区間和、r指定なしのときs[:l]の区間和 O(logN)
+    bit.sum(l, r) : s[l:r]の区間和、r指定なしのときs[:l]の区間和 O(logN)
     bit.bisect(val) : s[:i+1] >= valとなる最小のi O(logN)
     """
     def __init__(self, size):
@@ -22,7 +22,6 @@ class BIT:
             left -= left & -left
         if right is None:
             return lres
-        right += 1
         rres = 0
         while right:
             rres += self.data[right]

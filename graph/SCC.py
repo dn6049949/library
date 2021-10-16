@@ -1,44 +1,66 @@
 """
 Strongly Connected Components : O(V+E)
+ref: https://atcoder.jp/contests/practice2/submissions/16953645
 """
 
-import sys
-from collections import deque
-sys.setrecursionlimit(10**7)
 
-def scc(v):
-    n = len(v)
-    def dfs(x):
-        d[x] = 0
-        for y in v[x]:
-            if d[y]:
-                dfs(y)
-        path.append(x)
-    
-    def revbfs(x,i):
-        q = deque([x])
-        res[x] = i
-        while q:
-            x = q.popleft()
-            for y in rev[x]:
-                if res[y] is None:
-                    res[y] = i
-                    q.append(y)
+class SCC:
+    def __init__(self,n):
+        self.n = n
+        self.edges = []
 
-    rev = [[] for _ in range(n)]
-    for i,vi in enumerate(v):
-        for j in v[i]:
-            rev[j].append(i)
-    
-    path = []
-    d = [1]*n
-    for x in range(n):
-        if d[x]:
-            dfs(x)
-    i = 0
-    res = [None]*n
-    for x in path[::-1]:
-        if res[x] is None:
-            revbfs(x,i)
-            i += 1
-    return res
+    def add_edge(self,a,b):
+        self.edges.append((a,b))
+
+    def scc(self):
+        n = self.n
+        counter = [0]*(n+1)
+        elist = [0]*len(self.edges)
+        for x,y in self.edges:
+            counter[x+1] += 1
+        for x in range(n):
+            counter[x+1] += counter[x]
+        start = counter[:]
+        for x,y in self.edges:
+            elist[counter[x]] = y
+            counter[x] += 1
+
+        k = 0
+        low = [0]*n
+        num = [-1]*n
+        pre = [None]*n
+        visited = []
+        q = []
+        sccs = []
+        for x in range(n):
+            if num[x] < 0:
+                q.append(x)
+                q.append(x)
+                while q:
+                    x = q.pop()
+                    if num[x] < 0:
+                        low[x] = num[x] = k
+                        k += 1
+                        visited.append(x)
+                        for i in range(start[x],start[x+1]):
+                            y = elist[i]
+                            if num[y] < 0:
+                                q.append(y)
+                                q.append(y)
+                                pre[y] = x
+                            else:
+                                low[x] = min(low[x],num[y])
+                    else:
+                        if low[x] == num[x]:
+                            scc = []
+                            while 1:
+                                y = visited.pop()
+                                num[y] = n
+                                scc.append(y)
+                                if x == y:
+                                    break
+                            sccs.append(scc)
+                        y = pre[x]
+                        if y is not None:
+                            low[y] = min(low[y],low[x])
+        return sccs[::-1]

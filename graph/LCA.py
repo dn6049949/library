@@ -6,6 +6,7 @@ lca : O(logN)
 
 
 class LCA:
+    __slots__ = ["n","h","root","d","p"]
     def __init__(self, v, root=0):
         self.n = len(v)
         self.h = self.n.bit_length()
@@ -34,15 +35,15 @@ class LCA:
 
 
     def lca(self, x, y):
+        p = self.p
         if self.d[x] < self.d[y]:
             x, y = y, x
 
-        dy = self.d[y]
-        k = self.d[x] - dy
+        k = self.d[x] - self.d[y]
         i = 0
         while k:
             if k&1:
-                x = self.p[i][x]
+                x = p[i][x]
             i += 1
             k >>= 1
 
@@ -50,11 +51,13 @@ class LCA:
             return x
 
         for i in range(self.h)[::-1]:
-            if self.p[i][x] != self.p[i][y]:
-                x = self.p[i][x]
-                y = self.p[i][y]
-        return self.p[0][x]
+            if p[i][x] != p[i][y]:
+                x = p[i][x]
+                y = p[i][y]
+        return p[0][x]
 
 
     def dist(self, x, y):
-        return self.d[x] + self.d[y] - 2 * self.d[self.lca(x, y)]
+        d = self.d
+        return d[x] + d[y] - 2 * d[self.lca(x, y)]
+

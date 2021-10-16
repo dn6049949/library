@@ -17,13 +17,13 @@ def convex_hull(ps):
     k = 0
     qs = [0]*(n+2)
     for i in range(n):
-        while k > 1 and det(minus(qs[k-1], qs[k-2]), minus(ps[i], qs[k-1])) < 0:
+        while k > 1 and det(minus(qs[k-1], qs[k-2]), minus(ps[i], qs[k-1])) <= 0:
             k -= 1
         qs[k] = ps[i]
         k += 1
     t = k
     for i in range(n-1)[::-1]:
-        while k > t and det(minus(qs[k-1], qs[k-2]), minus(ps[i], qs[k-1])) < 0:
+        while k > t and det(minus(qs[k-1], qs[k-2]), minus(ps[i], qs[k-1])) <= 0:
             k -= 1
         qs[k] = ps[i]
         k += 1

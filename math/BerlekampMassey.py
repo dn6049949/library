@@ -30,6 +30,7 @@ def berlekamp_massey(a):
             d = sum([ci*sj for ci,sj in zip(c[:L+1],s[i-L:i+1][::-1])])
             
     c0 = c[0]
+    print(c)
     res = ["a_n ="]
     for i, ci in enumerate(c):
         if i == 0 or ci == 0:
@@ -48,3 +49,6 @@ def berlekamp_massey(a):
     if len(res) == 1:
         return None
     return " ".join(res)
+
+
+print(berlekamp_massey([1,1,2]))

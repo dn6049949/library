@@ -2,23 +2,29 @@
 Union-Find
 """
 
-def root(x):
-    if x == par[x]:
-        return x
-    par[x] = root(par[x])
-    return par[x]
+
+class UnionFind:
+
+    __slots__ = ["par", "rank"]
+
+    def __init__(self, n):
+        self.par = list(range(n))
+        self.rank = [0]*n
 
 
-def unite(x,y):
-    x = root(x)
-    y = root(y)
-    if rank[x] < rank[y]:
-        par[x] = y
-    else:
-        par[y] = x
-        if rank[x] == rank[y]:
-            rank[x] += 1
+    def root(self, x):
+        if x == self.par[x]:
+            return x
+        self.par[x] = self.root(self.par[x])
+        return self.par[x]
 
 
-par = list(range(n))
-rank = [0]*n
+    def unite(self, x, y):
+        x = self.root(x)
+        y = self.root(y)
+        if self.rank[x] < self.rank[y]:
+            self.par[x] = y
+        else:
+            self.par[y] = x
+            if self.rank[x] == self.rank[y]:
+                self.rank[x] += 1

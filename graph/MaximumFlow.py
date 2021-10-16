@@ -1,62 +1,62 @@
 """
-Maximum Flow : O(EV^2)
+Maximum Flow : O(V^2E)
+ref: https://tjkendev.github.io/procon-library/python/max_flow/dinic.html
 """
 
 from collections import deque
 
 class Dinic:
-    def __init__(self, size):
-        self.size = size
-        self.graph = [[] for _ in range(size)]
-        self.cap = [[0]*size for _ in range(size)]
+    __slots__ = ["n", "graph", "level", "it"]
+
+
+    def __init__(self, n):
+        self.n = n
+        self.graph = [[] for i in range(n)]
 
 
     def add_edge(self, fr, to, cap=1):
-        self.graph[fr].append(to)
-        self.graph[to].append(fr)
-        self.cap[fr][to] = cap
+        forward = [to, cap, None]
+        forward[2] = backward = [fr, 0, forward]
+        self.graph[fr].append(forward)
+        self.graph[to].append(backward)
 
 
-    def _bfs(self, s, t):
-        self.level = [None]*self.size
-        pre = [None]*self.size
-        self.level[s] = 0
-        q = deque([s])
-        while q:
-            v = q.popleft()
-            if v == t:
-                break
-            lv = self.level[v] + 1
-            for w in self.graph[v]:
-                if self.cap[v][w] and self.level[w] is None:
-                    self.level[w] = lv
-                    pre[w] = v
-                    q.append(w)
-        else:
-            return False
+    def bfs(self, s, t):
+        self.level = level = [None]*self.n
+        deq = deque([s])
+        level[s] = 0
+        graph = self.graph
+        while deq:
+            v = deq.popleft()
+            lv = level[v] + 1
+            for w, cap, _ in graph[v]:
+                if cap and level[w] is None:
+                    level[w] = lv
+                    deq.append(w)
+        return level[t] is not None
 
-        path = [t]
-        f = float("inf")
-        w = t
-        while w != s:
-            v = pre[w]
-            path.append(v)
-            cap = self.cap[v][w]
-            if cap < f:
-                f = cap
-            w = v
 
-        for i in range(1, len(path)):
-            v, w = path[-i],path[-i-1]
-            self.cap[v][w] -= f
-            self.cap[w][v] += f
-
-        self.flow += f
-        return True
+    def dfs(self, v, t, f):
+        if v == t:
+            return f
+        level = self.level
+        for e in self.graph[v]:
+            w, cap, rev = e
+            if cap and level[v] < level[w]:
+                d = self.dfs(w, t, min(f, cap))
+                if d:
+                    e[1] -= d
+                    rev[1] += d
+                    return d
+        return 0
 
 
     def flow(self, s, t):
-        self.flow = 0
-        while self._bfs(s, t):
-            continue
-        return self.flow
+        flow = 0
+        graph = self.graph
+        while self.bfs(s, t):
+            f = float("inf")
+            while f:
+                f = self.dfs(s, t, float("inf"))
+                flow += f
+        return flow
